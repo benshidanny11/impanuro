@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_60sdp"
+    android:orientation="vertical"
+
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/_5sdp">
+        <TextView
+            android:id="@+id/txt_advice_title_in_item"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advice title"
+            android:textSize="@dimen/_14sdp"/>
+        <TextView
+            android:id="@+id/txt_advice_date_in_item"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Advice date"
+            android:textSize="@dimen/_12sdp"/>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/txt_advice_day_in_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Day"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:textStyle="bold"
+        />
+    <View
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:background="#D3D3D3"/>
+</RelativeLayout>
