@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".AdviceActivity">
-    <include
-        layout="@layout/toolbar"/>
+    android:layout_height="match_parent">
+
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="?attr/actionBarSize"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/rec_advice_list">
+        android:layout_height="wrap_content"
+        android:id="@+id/rec_months_list">
 
     </androidx.recyclerview.widget.RecyclerView>
     <ProgressBar
@@ -20,5 +15,5 @@
         android:layout_height="@dimen/_30sdp"
         android:layout_centerInParent="true"
         android:visibility="gone"
-        android:id="@+id/progress_load_advices_in_advice_activity"/>
+        android:id="@+id/progress_load_advices"/>
 </RelativeLayout>

@@ -1,10 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
+
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DisplayAdviceActivity">
+    tools:context=".DisplayAdviceActivity"
+    android:orientation="vertical"
+    android:background="@color/purple_700">
+    <include
+        layout="@layout/advice_toolbar"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_80sdp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Advice title"
+            android:textColor="#fff"
+            android:textSize="@dimen/_14sdp"
+            android:id="@+id/txt_advice_title_in_display_advice"/>
 
-</RelativeLayout>
+    </RelativeLayout>
+    <LinearLayout
+        android:background="@drawable/whiteroundedback"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <LinearLayout
+            android:layout_margin="@dimen/_10sdp"
+            android:padding="@dimen/_10sdp"
+            android:background="@drawable/ylt_border"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_360sdp"
+            android:orientation="horizontal">
+            <RelativeLayout
+                android:padding="@dimen/_8sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:scaleType="fitXY"
+                    android:layout_width="@dimen/_130sdp"
+                    android:layout_height="@dimen/_250sdp"
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/ic_img_place_holder"
+                    android:id="@+id/img_advice_feature_in_display_advice"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/_10sdp"
+
+                android:padding="@dimen/_8sdp">
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                   >
+                    <TextView
+                        android:textSize="@dimen/_14sdp"
+                        android:layout_centerInParent="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Hekjsajjkljsa ksakjn ka"
+                        android:id="@+id/txt_advice_content_in_display_advice"/>
+                </androidx.core.widget.NestedScrollView>
+            </RelativeLayout>
+
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:background="@drawable/btn_back"
+                android:text="Umwanzuro"
+                android:textColor="#fff"
+                android:textSize="@dimen/_14sdp"
+                android:textAllCaps="false"
+                android:id="@+id/btn_show_comment_in_display_advice"
+                />
+        </RelativeLayout>
+    </LinearLayout>
+
+
+
+</LinearLayout>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="@dimen/_10sdp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/request_subscription_number"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_13sdp" />
+
+    <EditText
+        android:id="@+id/txt_full_name_in_dialog_subscription_request"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:background="@drawable/txt_back"
+        android:hint="Enter your full name"
+        android:inputType="textEmailAddress"
+        android:paddingLeft="@dimen/_5sdp" />
+
+    <EditText
+        android:id="@+id/txt_user_phone_in_dialog_subscription_request"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/txt_back"
+        android:hint="Enter your phone number"
+        android:paddingLeft="@dimen/_5sdp" />
+
+    <EditText
+        android:id="@+id/txt_user_email_in_dialog_subscription_request"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:background="@drawable/txt_back"
+        android:hint="Enter your phone email"
+        android:paddingLeft="@dimen/_5sdp" />
+
+    <View
+        android:id="@+id/lyt_divider"
+        android:layout_width="match_parent"
+        android:layout_height="0.6dp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/colorSeparator"
+        android:orientation="horizontal" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_below="@+id/lyt_divider"
+        android:layout_margin="@dimen/_5sdp">
+
+        <Button
+            android:id="@+id/btn_cancel_in__dialog_subscription_request"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_back"
+            android:text="Cancel"
+            android:textAllCaps="false"
+            android:textColor="#fff" />
+
+        <Button
+            android:id="@+id/btn_send_request_txt_user_phone_in_dialog_subscription_request"
+            android:layout_width="@dimen/_120sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_back"
+            android:text="Send request"
+            android:textAllCaps="false"
+            android:textColor="#fff" />
+    </RelativeLayout>
+</LinearLayout>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Impanuro App</string>
+    <string name="ten_thousand">10000</string>
+    <string name="one_thousand">1000</string>
+    <string name="five_thousand">5000</string>
+    <string name="request_subscription_number">Request subscription number</string>
 </resources>
