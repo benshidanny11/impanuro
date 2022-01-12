@@ -1,17 +1,20 @@
 package com.dannyp.impanuroapp.items;
 
 public class AdviceItem {
-    String date,titlte,description,status,comment,imageLink;
+    String date,titlte,status,imageLink,advice;
     int monthNumber;
 
-    public AdviceItem( int monthNumber,String date, String titlte, String description, String status, String comment, String imageLink) {
+    public AdviceItem(String date, String titlte, String status, String imageLink, String advice, int monthNumber) {
         this.date = date;
         this.titlte = titlte;
-        this.description = description;
         this.status = status;
-        this.comment = comment;
         this.imageLink = imageLink;
+        this.advice = advice;
         this.monthNumber = monthNumber;
+    }
+
+    public String getAdvice() {
+        return advice;
     }
 
     public String getDate() {
@@ -22,17 +25,12 @@ public class AdviceItem {
         return titlte;
     }
 
-    public String getDescription() {
-        return description;
-    }
+
 
     public String getStatus() {
         return status;
     }
 
-    public String getComment() {
-        return comment;
-    }
 
     public String getImageLink() {
         return imageLink;

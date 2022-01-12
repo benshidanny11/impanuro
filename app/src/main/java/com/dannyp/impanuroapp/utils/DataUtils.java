@@ -43,15 +43,16 @@ public class DataUtils {
         return dupFreeMonthItems;
     }
 
-    public static ArrayList<AdviceItem> getAdviceList(JSONArray jsonArray) {
+    public static ArrayList<AdviceItem> getAdviceList(JSONArray jsonArray,Context context) {
 
         ArrayList<AdviceItem> adviceItems = new ArrayList<>();
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jSONObject = jsonArray.getJSONObject(i);
-                    adviceItems.add(new AdviceItem(DateUtils.getExactDateNumber(jSONObject.getString("adv_date")),jSONObject.getString("adv_date"),jSONObject.getString("adv_title"),jSONObject.getString("adv_body"),jSONObject.getString("status"),jSONObject.getString("comment"),jSONObject.getString("adv_feature_img")));
+                    adviceItems.add(new AdviceItem(jSONObject.getString("adv_date"),jSONObject.getString("adv_title"),jSONObject.getString("status"),jSONObject.getString("adv_feature_img"),jSONObject.getString("advicebody"),1));
             }
         } catch (JSONException e) {
+            Toast.makeText(context, "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

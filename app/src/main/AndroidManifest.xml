@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dannyp.impanuroapp">
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
@@ -11,7 +12,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ImpanuroApp">
-        <activity android:name=".DisplayAdviceActivity"></activity>
+        <activity
+            android:name=".AppInfoActivity"
+            android:exported="true" />
+        <activity
+            android:name=".SubscriptionActivity"
+            android:exported="true" />
+        <activity
+            android:name=".ChooseStatusActivity"
+            android:exported="true" />
+        <activity android:name=".DisplayAdviceActivity" />
         <activity android:name=".AdviceActivity" />
         <activity android:name=".WelcomeActivity">
             <intent-filter>

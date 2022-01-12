@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -32,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Ahabanza"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_settings_applications_24, "Settings"))
+                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_menu_24, "Ibindi"))
                 .setActiveColor(R.color.purple_500)
                 .setFirstSelectedPosition(0)
                 .initialise();
@@ -60,5 +61,11 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(MainActivity.this,ChooseStatusActivity.class));
     }
 }

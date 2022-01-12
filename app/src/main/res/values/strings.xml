@@ -4,4 +4,19 @@
     <string name="one_thousand">1000</string>
     <string name="five_thousand">5000</string>
     <string name="request_subscription_number">Request subscription number</string>
+    <string name="manual_title">Uko impanuro app ikora</string>
+    <string name="policy_title">Amategeko n\'amabwiriza</string>
+    <string name="contact_title">Contact us</string>
+    <string name="manual_body">Iyi Mobile Application « IMPANURO », yatekerejwe n\' ABATOZA B\'INGO Ltd, akaba ari itsinda ry\'abashakashatsi, abanditsi, n\'abagishwanama mu bijyanye n\'urukundo n\'imibanire y\'abifuza kubaka rugakomera! Ni impuguke mu myitwarire n\'imitekerereze ya muntu!\n
+        Igizwe n\'impanuro z\'agenewe abasore n\'inkumi mu rwego rwo kubafasha gukundana no kumenyana. Hari kandi n\'impanuro n\'izagenewe n\'abashakanye hagamijwe kubafasha kuvugurura urukudo no kunoza imibanire hagati yabo. Iyi App igizwe n\'impanuro z\'amezi 12. Uwifuza kuzibona zose ashyira iyo application muri telefone ye, akishyura ifatabuguzi ry\'umwaka! Uryishyuye ahabwa "code" imufasha kuzibona. Si impanuro gusa ahubwo uwishyuye abona impanuro n\'umwitozo umufasha kwinjira mu buzima burushijeho kuryoherwa mu rukundo!
+</string>
+    <string name="policy_body">1. Iyi Mobile Application ni umutungo bwite wa: ABATOZA B\'INGO Ltd (copyrighted material and intellectual property of ABATOZA B\'INGO Ltd).\n
+2. Iyo wishyuye ifatabuguzi, ABATOZA B\'INGO Ltd baguha garanti y\'igihe kingana n\'umwaka.\n
+3. ABATOZA B\'INGO Ltd bafite uburenganzira bwose bwo gufunga mobile application yabo igihe cyose uwafashe ifatabuguzi atubahirije amabwiriza asabwa nko gukoresha urufunguzo (password) ku matelefoni arenze imwe.
+4.	Ifatabuguzi ryo gusoma impanuro z\'ukwezi ringana n\'amafaranga igihumbi (1000) gusa kandi yishurwa rimwe mu mwaka.\n
+5.	Iyo bibaye ngombwa guhindura tefone ku mpamvu zo gutakara cyangwa se yapfuye, icyo gihe ubisaba ABATOZA B\'INGO Ltd bakaguha urundi rufunguzo kandi ibyo biba inshuro zitarenze 2 mu mwaka.\n
+6.	Kwishushura ifatabuguzi ukabasha gusoma impanuro, ntibisimbura kugisha inama abanyamwuga. Niba ukeneye kugisha inama, hamagara cyangwa wandikire ABATOZA B\'INGO kuri 0782706256.\n </string>
+    <string name="contact_body">1)	Igihe waba ukeneye kugisha inama cyangwa ufite ikindi kibazo cyihariye: hamagara cyangwa wandikire ABATOZA B\'INGO kuri 0782706256.\n
+2)	Niba kandi ukeneye gusoma izindi nama zitangwa n\' ABATOZA B\'INGO, jya ku rubuga rwabo: www.abatozabingo.org.\n
+3)	Niba hari inama cyangwa ibitekerezo wifuza guha ABATOZA B\'INGO, bandikire kuri email: abatozabingo@gmail.com\n</string>
 </resources>

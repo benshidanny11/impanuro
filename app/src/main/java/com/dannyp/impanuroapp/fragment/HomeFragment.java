@@ -25,9 +25,11 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.dannyp.impanuroapp.R;
 import com.dannyp.impanuroapp.adapters.MonthsAdapter;
 import com.dannyp.impanuroapp.constants.ApiLinks;
+import com.dannyp.impanuroapp.constants.StringConstants;
 import com.dannyp.impanuroapp.dumydata.MonthsData;
 import com.dannyp.impanuroapp.items.AdviceItem;
 import com.dannyp.impanuroapp.items.MonthsItem;
+import com.dannyp.impanuroapp.publicdata.PublicData;
 import com.dannyp.impanuroapp.utils.DataUtils;
 import com.dannyp.impanuroapp.utils.DateUtils;
 
@@ -38,6 +40,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static com.dannyp.impanuroapp.constants.ApiLinks.GET_DATES;
+import static com.dannyp.impanuroapp.constants.ApiLinks.GET_DATES_FOR_SINGLE;
 
 public class HomeFragment extends Fragment {
 
@@ -57,10 +60,16 @@ public class HomeFragment extends Fragment {
     }
 
     public void getDataToViews(){
+        String adviceAPI="";
+        if(PublicData.AdviceType.equals(StringConstants.SINGLE)){
+            adviceAPI=GET_DATES_FOR_SINGLE;
+        }else {
+            adviceAPI=GET_DATES;
+        }
         try {
             progressBar.setVisibility(View.VISIBLE);
             ArrayList<MonthsItem> monthsItems=new ArrayList<>();
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, GET_DATES, new Response.Listener<String>() {
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, adviceAPI, new Response.Listener<String>() {
                 public void onResponse(String param1String) {
                     progressBar.setVisibility(View.GONE);
                     try {
@@ -89,10 +98,10 @@ public class HomeFragment extends Fragment {
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));
             Volley.newRequestQueue(getContext()).add((Request)stringRequest);
-            return;
+
         } catch (Exception exception) {
             Toast.makeText(getActivity(), exception.getMessage(), Toast.LENGTH_LONG).show();
-            return;
+
         }
     }
 }

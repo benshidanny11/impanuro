@@ -22,8 +22,10 @@ import com.android.volley.toolbox.Volley;
 import com.dannyp.impanuroapp.adapters.AdviceAdapter;
 import com.dannyp.impanuroapp.adapters.MonthsAdapter;
 import com.dannyp.impanuroapp.constants.ApiLinks;
+import com.dannyp.impanuroapp.constants.StringConstants;
 import com.dannyp.impanuroapp.dumydata.AdviceData;
 import com.dannyp.impanuroapp.items.MonthsItem;
+import com.dannyp.impanuroapp.publicdata.PublicData;
 import com.dannyp.impanuroapp.utils.DataUtils;
 
 import org.json.JSONArray;
@@ -32,7 +34,10 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import static com.dannyp.impanuroapp.constants.ApiLinks.GET_DATES;
+import static com.dannyp.impanuroapp.constants.ApiLinks.GET_DATES_FOR_SINGLE;
 import static com.dannyp.impanuroapp.constants.ApiLinks.getAdviceAdviceByMonth;
+import static com.dannyp.impanuroapp.constants.ApiLinks.getAdviceAdviceByMonthForSingle;
 
 public class AdviceActivity extends AppCompatActivity {
 
@@ -65,15 +70,21 @@ public class AdviceActivity extends AppCompatActivity {
 
     public void getDataToViews(int month){
         try {
+            String adviceMonthAPI="";
+            if(PublicData.AdviceType.equals(StringConstants.SINGLE)){
+                adviceMonthAPI=getAdviceAdviceByMonthForSingle(month);
+            }else {
+                adviceMonthAPI=getAdviceAdviceByMonth(month);
+            }
             progressBar.setVisibility(View.VISIBLE);
-            ArrayList<MonthsItem> monthsItems=new ArrayList<>();
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, getAdviceAdviceByMonth(month), new Response.Listener<String>() {
+           // ArrayList<MonthsItem> monthsItems=new ArrayList<>();
+            StringRequest stringRequest = new StringRequest(Request.Method.GET,adviceMonthAPI, new Response.Listener<String>() {
                 public void onResponse(String param1String) {
                     progressBar.setVisibility(View.GONE);
                     try {
                         JSONArray jSONArray = (new JSONObject(param1String)).getJSONArray("advices");
 
-                        adapter = new AdviceAdapter(DataUtils.getAdviceList(jSONArray),AdviceActivity.this);
+                        adapter = new AdviceAdapter(DataUtils.getAdviceList(jSONArray,AdviceActivity.this),AdviceActivity.this);
                         LinearLayoutManager layoutManager=new LinearLayoutManager(AdviceActivity.this);
                         recAdviceList.setLayoutManager(layoutManager);
                         recAdviceList.setAdapter(adapter);
@@ -93,10 +104,9 @@ public class AdviceActivity extends AppCompatActivity {
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));
             Volley.newRequestQueue(this).add((Request)stringRequest);
-            return;
         } catch (Exception exception) {
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
-            return;
+
         }
     }
 }

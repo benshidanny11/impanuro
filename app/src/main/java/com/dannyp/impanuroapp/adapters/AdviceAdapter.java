@@ -6,94 +6,84 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.dannyp.impanuroapp.DisplayAdviceActivity;
 import com.dannyp.impanuroapp.R;
 import com.dannyp.impanuroapp.items.AdviceItem;
 import com.dannyp.impanuroapp.utils.DateUtils;
 import com.github.lzyzsd.randomcolor.RandomColor;
-import com.vstechlab.easyfonts.EasyFonts;
-
 import java.util.ArrayList;
 
 public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHolder> {
-
     private ArrayList<AdviceItem> adviceItems;
-    private Context context;
+    /* access modifiers changed from: private */
+    public Context context;
 
-    public AdviceAdapter(ArrayList<AdviceItem> adviceItems, Context context) {
-        this.adviceItems = adviceItems;
-        this.context = context;
+    public AdviceAdapter(ArrayList<AdviceItem> adviceItems2, Context context2) {
+
+        this.adviceItems = adviceItems2;
+        this.context = context2;
     }
 
-    @NonNull
-    @Override
-    public AdviceHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public AdviceHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         return new AdviceHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.advice_item, parent, false));
     }
 
-    @Override
-    public void onBindViewHolder(@NonNull AdviceHolder holder, int position) {
+    public void onBindViewHolder(AdviceHolder holder, int position) {
         try {
-            RandomColor randomColor = new RandomColor();
-            AdviceItem item = adviceItems.get(position);
+
+            new RandomColor();
+            final AdviceItem item = this.adviceItems.get(position);
             holder.txtAdviceTitle.setText(item.getTitlte());
-            holder.txtAdviceDate.setText("Impanuro kumunsi wa "+ DateUtils.getExactDateNumber(item.getDate())+":");
-            if (position % 2 == 1) {
-
-                holder.txtAdviceDay.setText("Subscribed");
-                holder.txtAdviceDay.setEnabled(false);
-                holder.txtAdviceDay.setBackgroundColor(context.getResources().getColor(R.color.colorSeparator));
-            }
-//      holder.txtAdviceDay.setText(item.getDay());
-//      holder.txtAdviceDay.setTypeface(EasyFonts.robotoRegular(context));
-//      holder.txtAdviceDay.setTextColor(randomColor.randomColor());
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
+            TextView textView = holder.txtAdviceDate;
+            textView.setText("Impanuro kumunsi wa " + DateUtils.getExactDateNumber(item.getDate()) + ":");
+            holder.txtAdviceDay.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-
+                    Intent intent = new Intent();
+                    intent.setAction("android.intent.action.SEND");
+                    intent.putExtra("android.intent.extra.TEXT", "From Emma Rwanda\n\n" + item.getTitlte().concat("\n\n\n").concat(item.getTitlte()));
+                    intent.setType("text/plain");
+                    AdviceAdapter.this.context.startActivity(intent);
+                }
+            });
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
                     try {
-                        Intent intent=new Intent(context, DisplayAdviceActivity.class);
-                        intent.putExtra("title",item.getTitlte());
-                        intent.putExtra("content",item.getDescription());
-                        intent.putExtra("image_link",item.getImageLink());
-                        intent.putExtra("comment",item.getComment());
-                        intent.putExtra("date",DateUtils.getExactDateNumber(item.getDate()));
-                        intent.putExtra("month_name",DateUtils.getExactMonthNameFromDate(item.getDate()));
-                        ((Activity)context).startActivity(intent);
+                        Intent intent = new Intent(AdviceAdapter.this.context, DisplayAdviceActivity.class);
+                        intent.putExtra("title", item.getTitlte());
+                        intent.putExtra("image_link", item.getImageLink());
+                        intent.putExtra("advice",item.getAdvice());
+                        intent.putExtra("date", DateUtils.getExactDateNumber(item.getDate()));
+                        intent.putExtra("month_name", DateUtils.getExactMonthNameFromDate(item.getDate()));
+                        ((Activity) AdviceAdapter.this.context).startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-
-
                 }
             });
-        }catch (Exception e){
-            Toast.makeText(context, "Error "+e.getMessage(), Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Context context2 = this.context;
+            Toast.makeText(context2, "Error " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
     }
 
-    @Override
     public int getItemCount() {
-        return adviceItems.size();
+        return this.adviceItems.size();
     }
 
     class AdviceHolder extends RecyclerView.ViewHolder {
-        TextView txtAdviceTitle, txtAdviceDate;
-        Button txtAdviceDay;
+        TextView txtAdviceDate;
+        ImageView txtAdviceDay;
+        TextView txtAdviceTitle;
 
-        public AdviceHolder(@NonNull View itemView) {
+        public AdviceHolder(View itemView) {
             super(itemView);
-            txtAdviceTitle = (TextView) itemView.findViewById(R.id.txt_advice_title_in_item);
-            txtAdviceDate = (TextView) itemView.findViewById(R.id.txt_advice_date_in_item);
-            txtAdviceDay = (Button) itemView.findViewById(R.id.txt_advice_day_in_item);
+            this.txtAdviceTitle = (TextView) itemView.findViewById(R.id.txt_advice_title_in_item);
+            this.txtAdviceDate = (TextView) itemView.findViewById(R.id.txt_advice_date_in_item);
+            this.txtAdviceDay = (ImageView) itemView.findViewById(R.id.btn_share_in_advice_item);
         }
     }
 }
