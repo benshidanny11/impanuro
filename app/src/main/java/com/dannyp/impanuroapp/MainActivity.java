@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Impanuro");
-        getSupportActionBar().setSubtitle("Menya uko wakitwara");
+        getSupportActionBar().setSubtitle("Menya gukunda / gukundwa");
         BottomNavigationBar bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
 
         bottomNavigationBar

@@ -39,7 +39,7 @@ public class AdviceAdapter extends RecyclerView.Adapter<AdviceAdapter.AdviceHold
             final AdviceItem item = this.adviceItems.get(position);
             holder.txtAdviceTitle.setText(item.getTitlte());
             TextView textView = holder.txtAdviceDate;
-            textView.setText("Impanuro kumunsi wa " + DateUtils.getExactDateNumber(item.getDate()) + ":");
+            textView.setText("Impanuro ku itariki ya 1" + DateUtils.getExactDateNumber(item.getDate()) + ":");
             holder.txtAdviceDay.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Intent intent = new Intent();

@@ -11,28 +11,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:text="Single"
-            android:background="@drawable/btn_back_2"
-            android:textColor="#fff"
-            android:width="@dimen/_150sdp"
-            android:id="@+id/btn_single_in_choose_status"/>
 
         <Button
-            android:background="@drawable/btn_back_2"
+            android:id="@+id/btn_single_in_choose_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_30sdp"
             android:layout_centerHorizontal="true"
-            android:text="Maried"
-            android:textColor="#fff"
             android:width="@dimen/_150sdp"
+            android:background="@drawable/btn_back_2"
+            android:text="@string/ingaragu"
+            android:textColor="#fff" />
+
+        <Button
             android:id="@+id/btn_married_in_choose_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/btn_single_in_choose_status"
-            />
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:width="@dimen/_150sdp"
+            android:background="@drawable/btn_back_2"
+            android:text="@string/abashakanye"
+            android:textColor="#fff" />
 
     </RelativeLayout>
 </RelativeLayout>

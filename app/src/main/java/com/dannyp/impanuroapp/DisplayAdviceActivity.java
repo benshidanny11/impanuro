@@ -38,7 +38,7 @@ public class DisplayAdviceActivity extends AppCompatActivity {
         if (extras != null) {
             getSupportActionBar().setTitle((CharSequence) "Impanuro");
             ActionBar supportActionBar = getSupportActionBar();
-            supportActionBar.setSubtitle("Impanuro y'umunsi wa " +this.bundle.getInt("date") + " " + this.bundle.getString("month_name"));
+            supportActionBar.setSubtitle("Impanuro yo kwitariki ya " +this.bundle.getInt("date") + " " + this.bundle.getString("month_name"));
             this.txtAdviceTitle.setText(this.bundle.getString("title").trim());
             RequestManager with = Glide.with((FragmentActivity) this);
             ((RequestBuilder) with.load(ApiLinks.ROOT_IMAGE_LINK + this.bundle.getString("image_link")).placeholder((int) R.drawable.ic_img_place_holder)).into(this.imgAdviceFeature);

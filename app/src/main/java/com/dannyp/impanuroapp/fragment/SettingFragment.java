@@ -36,7 +36,7 @@ public class SettingFragment extends Fragment {
         subscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Objects.requireNonNull(getActivity()).startActivity(new Intent(getActivity(), SubscriptionActivity.class));
+                requireActivity().startActivity(new Intent(getActivity(), SubscriptionActivity.class));
             }
         });
         userManual.setOnClickListener(new View.OnClickListener() {
