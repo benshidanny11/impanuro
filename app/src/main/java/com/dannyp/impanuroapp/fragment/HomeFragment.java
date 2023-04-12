@@ -16,9 +16,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpStack;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
@@ -30,6 +33,7 @@ import com.dannyp.impanuroapp.dumydata.MonthsData;
 import com.dannyp.impanuroapp.items.AdviceItem;
 import com.dannyp.impanuroapp.items.MonthsItem;
 import com.dannyp.impanuroapp.publicdata.PublicData;
+import com.dannyp.impanuroapp.utils.CustomSSLSocketFactory;
 import com.dannyp.impanuroapp.utils.DataUtils;
 import com.dannyp.impanuroapp.utils.DateUtils;
 
@@ -38,6 +42,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.dannyp.impanuroapp.constants.ApiLinks.GET_DATES;
 import static com.dannyp.impanuroapp.constants.ApiLinks.GET_DATES_FOR_SINGLE;
@@ -83,6 +88,7 @@ public class HomeFragment extends Fragment {
                         recMonthsList.setAdapter(adapter);
 
                     } catch (JSONException e) {
+                        Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
                         e.printStackTrace();
                     }
 
@@ -97,9 +103,11 @@ public class HomeFragment extends Fragment {
                 }
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));
-            Volley.newRequestQueue(getContext()).add((Request)stringRequest);
+            RequestQueue requestQueue= Volley.newRequestQueue(requireContext(), new HurlStack(null, new CustomSSLSocketFactory()));
+            requestQueue.add(stringRequest);
 
         } catch (Exception exception) {
+            exception.printStackTrace();
             Toast.makeText(getActivity(), exception.getMessage(), Toast.LENGTH_LONG).show();
 
         }

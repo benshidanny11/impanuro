@@ -16,11 +16,13 @@ import com.dannyp.impanuroapp.adapters.MonthsAdapter;
 import com.dannyp.impanuroapp.dumydata.MonthsData;
 import com.dannyp.impanuroapp.fragment.HomeFragment;
 import com.dannyp.impanuroapp.fragment.SettingFragment;
+import com.dannyp.impanuroapp.models.User;
+import com.dannyp.impanuroapp.utils.DialogUtil;
+import com.dannyp.impanuroapp.utils.SharedPrefs;
 
 public class MainActivity extends AppCompatActivity {
-
-
     Toolbar toolbar;
+    User user;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +55,10 @@ public class MainActivity extends AppCompatActivity {
             public void onTabReselected(int position) {
             }
         });
+        user= SharedPrefs.getUserData(this);
+        if(user.getPhoneNumber().equals("")){
+            DialogUtil.showCustomDialog(this);
+        }
         openFragment(new HomeFragment());
     }
 

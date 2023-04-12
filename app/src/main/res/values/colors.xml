@@ -25,4 +25,7 @@
     <color name="formMonth10">#A32470</color>
     <color name="formMonth11">#B8244E</color>
     <color name="formMonth12">#E3387C</color>
+    <color name="pay">#E35055</color>
+    <color name="free">#6A6A6A</color>
+    <color name="paid">#4CAF50</color>
 </resources>

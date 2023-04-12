@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -17,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dannyp.impanuroapp.adapters.AdviceAdapter;
@@ -26,6 +28,7 @@ import com.dannyp.impanuroapp.constants.StringConstants;
 import com.dannyp.impanuroapp.dumydata.AdviceData;
 import com.dannyp.impanuroapp.items.MonthsItem;
 import com.dannyp.impanuroapp.publicdata.PublicData;
+import com.dannyp.impanuroapp.utils.CustomSSLSocketFactory;
 import com.dannyp.impanuroapp.utils.DataUtils;
 
 import org.json.JSONArray;
@@ -103,7 +106,8 @@ public class AdviceActivity extends AppCompatActivity {
                 }
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));
-            Volley.newRequestQueue(this).add((Request)stringRequest);
+
+            Volley.newRequestQueue(this, new HurlStack(null, new CustomSSLSocketFactory())).add(stringRequest);
         } catch (Exception exception) {
             Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
 

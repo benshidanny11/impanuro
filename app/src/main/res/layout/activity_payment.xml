@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PaymentActivity"
+    android:orientation="vertical">
+    <include
+        layout="@layout/toolbar"/>
+
+    <TextView
+        android:id="@+id/txt_title_in_fragment_notes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:padding="@dimen/_5sdp"
+        android:text="Gushyigikira impanuro: 100 Rwf"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/_14sdp"
+        android:textStyle="bold" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.7dp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@color/colorSeparator" />
+ <RelativeLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     >
+     <LinearLayout
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:orientation="vertical"
+         android:layout_centerInParent="true"
+         android:padding="@dimen/_10sdp">
+
+         <TextView
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:text="Shyiramo nimero yawe ya Mtn cyangwa Aitel/ Tigo ufiteho byibura amafaranga 100 maze wunguke ubumenyi kandi ubike aya makuru muri Telefone yawe!"
+             />
+
+         <EditText
+             android:id="@+id/txt_user_phone_in_payment"
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/_40sdp"
+             android:layout_gravity="center"
+             android:layout_marginTop="@dimen/_10sdp"
+             android:background="@drawable/txt_back"
+             android:hint="Inomero yo kwishyuriraho"
+             android:inputType="phone"
+             android:paddingLeft="@dimen/_5sdp" />
+
+
+         <View
+             android:id="@+id/lyt_divider"
+             android:layout_width="match_parent"
+             android:layout_height="0.6dp"
+             android:layout_marginTop="@dimen/_20sdp"
+             android:background="@color/colorSeparator"
+             android:orientation="horizontal" />
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="@dimen/_40sdp"
+             android:layout_marginTop="@dimen/_10sdp">
+
+             <Button
+                 android:id="@+id/btn_pay_in_payment"
+                 android:layout_width="@dimen/_120sdp"
+                 android:layout_height="48dp"
+                 android:layout_alignParentRight="true"
+                 android:layout_centerVertical="true"
+                 android:background="@drawable/btn_back"
+                 android:text="Ishyura"
+                 android:textAllCaps="false"
+                 android:textColor="#fff" />
+         </RelativeLayout>
+     </LinearLayout>
+ </RelativeLayout>
+
+</LinearLayout>

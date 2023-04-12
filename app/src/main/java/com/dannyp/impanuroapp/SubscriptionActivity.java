@@ -38,11 +38,6 @@ public class SubscriptionActivity extends AppCompatActivity {
         this.txtPaymentValue = (EditText) findViewById(R.id.txt_subscription_amount);
         this.radioGroup = (RadioGroup)findViewById(R.id.btn_radio_payment_method);
         this.radioGroup1 = (RadioGroup) findViewById(R.id.btn_radio_subscription_duration);
-        this.btnRequestNumber.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                requestSubNumber();
-            }
-        });
         this.radioGroup1.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             public void onCheckedChanged(RadioGroup radioGroup, int checked) {
                 if (checked ==R.id.radio_one_month) {
@@ -56,28 +51,4 @@ public class SubscriptionActivity extends AppCompatActivity {
         });
     }
 
-    public void requestSubNumber() {
-        AlertDialog.Builder localBuilder = new AlertDialog.Builder(this);
-        View localView = LayoutInflater.from(this).inflate(R.layout.dialog_subsription_number_request_form, (ViewGroup) null);
-        this.txtUserNames = (EditText) localView.findViewById(R.id.txt_full_name_in_dialog_subscription_request);
-        this.txtUserPhone = (EditText) localView.findViewById(R.id.txt_user_phone_in_dialog_subscription_request);
-        this.txtEmail = (EditText) localView.findViewById(R.id.txt_user_email_in_dialog_subscription_request);
-        localBuilder.setView(localView);
-        final AlertDialog alertDialog = localBuilder.create();
-        alertDialog.setCancelable(false);
-        alertDialog.show();
-        ((Button) localView.findViewById(R.id.btn_cancel_in__dialog_subscription_request)).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                alertDialog.dismiss();
-            }
-        });
-        ((Button) localView.findViewById(R.id.btn_send_request_txt_user_phone_in_dialog_subscription_request)).setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                alertDialog.dismiss();
-                txtSubNumber.setText(new StringBuilder(String.valueOf(System.currentTimeMillis()).substring(0, 7)).reverse().toString());
-                lyt1.setVisibility(View.GONE);
-                lyt2.setVisibility(View.VISIBLE);
-            }
-        });
-    }
 }

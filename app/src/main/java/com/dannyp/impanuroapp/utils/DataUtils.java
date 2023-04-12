@@ -49,7 +49,9 @@ public class DataUtils {
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jSONObject = jsonArray.getJSONObject(i);
-                    adviceItems.add(new AdviceItem(jSONObject.getString("adv_date"),jSONObject.getString("adv_title"),jSONObject.getString("status"),jSONObject.getString("adv_feature_img"),jSONObject.getString("advicebody"),1));
+                AdviceItem item=new AdviceItem(jSONObject.getString("adv_id"),jSONObject.getString("adv_date"),jSONObject.getString("adv_title"),jSONObject.getString("status"),jSONObject.getString("adv_feature_img"),jSONObject.getString("advicebody"),1);
+                item.setUserId(jSONObject.getString("client_id"));
+                adviceItems.add(item);
             }
         } catch (JSONException e) {
             Toast.makeText(context, "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();

@@ -28,17 +28,11 @@ public class SettingFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView=inflater.inflate(R.layout.fragment_settings,container,false);
-        RelativeLayout subscription = (RelativeLayout) rootView.findViewById(R.id.subscription_container);
         RelativeLayout userManual = (RelativeLayout) rootView.findViewById(R.id.app_description_container);
         RelativeLayout policy = (RelativeLayout) rootView.findViewById(R.id.policy_container);
         contact=(RelativeLayout) rootView.findViewById(R.id.contact_us_container);
 
-        subscription.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                requireActivity().startActivity(new Intent(getActivity(), SubscriptionActivity.class));
-            }
-        });
+
         userManual.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

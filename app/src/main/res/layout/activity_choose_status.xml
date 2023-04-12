@@ -20,15 +20,15 @@
             android:width="@dimen/_150sdp"
             android:background="@drawable/btn_back_2"
             android:text="@string/ingaragu"
+            android:layout_below="@+id/btn_married_in_choose_status"
+            android:layout_marginTop="@dimen/_30sdp"
             android:textColor="#fff" />
 
         <Button
             android:id="@+id/btn_married_in_choose_status"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_single_in_choose_status"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/_30sdp"
             android:width="@dimen/_150sdp"
             android:background="@drawable/btn_back_2"
             android:text="@string/abashakanye"
