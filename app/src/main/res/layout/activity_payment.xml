@@ -18,7 +18,7 @@
         android:layout_marginTop="@dimen/_2sdp"
         android:gravity="center"
         android:padding="@dimen/_5sdp"
-        android:text="Gushyigikira impanuro: 100 Rwf"
+        android:text="Ifatabuguzi ry'impanuro: 100 Rwf"
         android:textColor="@color/colorPrimary"
         android:textSize="@dimen/_14sdp"
         android:textStyle="bold" />
@@ -37,7 +37,7 @@
          android:layout_width="match_parent"
          android:layout_height="wrap_content"
          android:orientation="vertical"
-         android:layout_centerInParent="true"
+         android:layout_marginTop="@dimen/_50sdp"
          android:padding="@dimen/_10sdp">
 
          <TextView
@@ -53,7 +53,7 @@
              android:layout_gravity="center"
              android:layout_marginTop="@dimen/_10sdp"
              android:background="@drawable/txt_back"
-             android:hint="Inomero yo kwishyuriraho"
+             android:hint="Inomero y'ifatabuguzi"
              android:inputType="phone"
              android:paddingLeft="@dimen/_5sdp" />
 
@@ -78,7 +78,7 @@
                  android:layout_alignParentRight="true"
                  android:layout_centerVertical="true"
                  android:background="@drawable/btn_back"
-                 android:text="Ishyura"
+                 android:text="Emeza"
                  android:textAllCaps="false"
                  android:textColor="#fff" />
          </RelativeLayout>

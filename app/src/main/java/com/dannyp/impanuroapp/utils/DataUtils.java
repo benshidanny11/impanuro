@@ -12,6 +12,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 
 public class DataUtils {
     public static ArrayList<MonthsItem> removeDuplicates(JSONArray jsonArray) {
@@ -43,15 +44,25 @@ public class DataUtils {
         return dupFreeMonthItems;
     }
 
-    public static ArrayList<AdviceItem> getAdviceList(JSONArray jsonArray,Context context) {
+    public static ArrayList<AdviceItem> getAdviceList(JSONArray jsonArray, Context context) {
 
         ArrayList<AdviceItem> adviceItems = new ArrayList<>();
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jSONObject = jsonArray.getJSONObject(i);
-                AdviceItem item=new AdviceItem(jSONObject.getString("adv_id"),jSONObject.getString("adv_date"),jSONObject.getString("adv_title"),jSONObject.getString("status"),jSONObject.getString("adv_feature_img"),jSONObject.getString("advicebody"),1);
+                AdviceItem item=new AdviceItem(jSONObject.getString("adv_id"),
+                        jSONObject.getString("adv_date"),
+                        jSONObject.getString("adv_title"),
+                        jSONObject.getString("status"),
+                        jSONObject.getString("adv_feature_img"),
+                        jSONObject.getString("advicebody"),
+                        jSONObject.getString("payment_status"),
+                        jSONObject.getString("payment_reference"),1);
                 item.setUserId(jSONObject.getString("client_id"));
-                adviceItems.add(item);
+                if(!adviceItems.contains(item)){
+                    adviceItems.add(item);
+                }
+
             }
         } catch (JSONException e) {
             Toast.makeText(context, "Error: "+e.getMessage(), Toast.LENGTH_SHORT).show();

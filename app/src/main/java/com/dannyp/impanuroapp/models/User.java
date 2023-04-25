@@ -44,4 +44,14 @@ public class User {
     public String getPhoneNumber() {
         return phoneNumber!=null?phoneNumber:"";
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                '}';
+    }
 }

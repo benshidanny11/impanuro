@@ -31,14 +31,14 @@ public class DialogUtil {
         if(mProgressDialog!=null)
         mProgressDialog.dismiss();
     }
-    public static void showDialog(Context context, String title, String content, String refNumber, String adviceId, User user){
+    public static void showDialog(Context context, String title, String content, String refNumber, String paymentStatus, String adviceId, User user){
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage(content);
         builder.setTitle(title);
         builder.setCancelable(false);
         builder.setPositiveButton("Yego", (DialogInterface.OnClickListener) (dialog, which) -> {
             // Call payment verification
-            RequestUtil.sendPaymentVerification(context,refNumber,adviceId, user);
+
         });
 
         builder.setNegativeButton("Oya", (DialogInterface.OnClickListener) (dialog, which) -> {
@@ -55,30 +55,31 @@ public class DialogUtil {
         builder.setCancelable(false);
         builder.setPositiveButton("Okay", (DialogInterface.OnClickListener) (dialog, which) -> {
             // Call payment verification
-            context.startActivity(new Intent(context, AdviceActivity.class));
             ((Activity)context).finish();
+            context.startActivity(new Intent(context, AdviceActivity.class));
+
         });
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
     }
-    public static void showCustomDialog(Context context){
-        Dialog customDialog;
-        customDialog = new Dialog(context);
-        customDialog.setContentView(R.layout.dialog_user_setup);
-        customDialog.setCancelable(false);
-        Button btnSubmit = customDialog.findViewById(R.id.btn_user_setup);
-        EditText txtPhoneNumber=customDialog.findViewById(R.id.txt_user_phone_in_dialog_user_setup);
-       customDialog.show();
-       btnSubmit.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               if(txtPhoneNumber.getText().length()<10){
-                   Toast.makeText(context,"Mushyiremo numero yuzuye",Toast.LENGTH_LONG).show();
-               }else{
-                   RequestUtil.getUserData(context, txtPhoneNumber.getText().toString().trim());
-                   customDialog.dismiss();
-               }
-           }
-       });
-    }
+//    public static void showCustomDialog(Context context){
+//        Dialog customDialog;
+//        customDialog = new Dialog(context);
+//        customDialog.setContentView(R.layout.dialog_user_setup);
+//        customDialog.setCancelable(false);
+//        Button btnSubmit = customDialog.findViewById(R.id.btn_user_setup);
+//        EditText txtPhoneNumber=customDialog.findViewById(R.id.txt_user_phone_in_dialog_user_setup);
+//       customDialog.show();
+//       btnSubmit.setOnClickListener(new View.OnClickListener() {
+//           @Override
+//           public void onClick(View view) {
+//               if(txtPhoneNumber.getText().length()<10){
+//                   Toast.makeText(context,"Mushyiremo numero yuzuye",Toast.LENGTH_LONG).show();
+//               }else{
+//
+//                   customDialog.dismiss();
+//               }
+//           }
+//       });
+//    }
 }

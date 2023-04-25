@@ -21,6 +21,7 @@
         <entry key="app/src/main/res/drawable/txt_back.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/whiteroundedback.xml" value="0.1785" />
         <entry key="app/src/main/res/drawable/ylt_border.xml" value="0.1785" />
+        <entry key="app/src/main/res/layout-land/activity_subscription.xml" value="0.20458553791887124" />
         <entry key="app/src/main/res/layout/activity_advice.xml" value="0.12681159420289856" />
         <entry key="app/src/main/res/layout/activity_app_info.xml" value="0.13451086956521738" />
         <entry key="app/src/main/res/layout/activity_choose_status.xml" value="0.25" />

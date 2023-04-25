@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
@@ -18,7 +19,11 @@ import com.dannyp.impanuroapp.fragment.HomeFragment;
 import com.dannyp.impanuroapp.fragment.SettingFragment;
 import com.dannyp.impanuroapp.models.User;
 import com.dannyp.impanuroapp.utils.DialogUtil;
+import com.dannyp.impanuroapp.utils.RequestUtil;
 import com.dannyp.impanuroapp.utils.SharedPrefs;
+
+import java.sql.Timestamp;
+import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
@@ -32,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("Impanuro");
         getSupportActionBar().setSubtitle("Menya gukunda / gukundwa");
         BottomNavigationBar bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
+
 
         bottomNavigationBar
                 .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Ahabanza"))
@@ -56,8 +62,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         user= SharedPrefs.getUserData(this);
+        assert user != null;
+
         if(user.getPhoneNumber().equals("")){
-            DialogUtil.showCustomDialog(this);
+//            DialogUtil.showCustomDialog(this);
+            RequestUtil.getUserData(this,  System.currentTimeMillis()/1000+ UUID.randomUUID().toString());
         }
         openFragment(new HomeFragment());
     }

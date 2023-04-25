@@ -1,6 +1,7 @@
 package com.dannyp.impanuroapp.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
+import com.dannyp.impanuroapp.AdviceActivity;
 import com.dannyp.impanuroapp.R;
 import com.dannyp.impanuroapp.adapters.MonthsAdapter;
 import com.dannyp.impanuroapp.constants.ApiLinks;
@@ -99,7 +101,7 @@ public class HomeFragment extends Fragment {
                     param1VolleyError.printStackTrace();
                     //  Log.e("Error==>>>", param1VolleyError.getMessage());
                     if (getActivity() != null)
-                        Toast.makeText(getActivity(), param1VolleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Habayemo ikibazo, mwongere mugerageze.", Toast.LENGTH_LONG).show();
                 }
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));

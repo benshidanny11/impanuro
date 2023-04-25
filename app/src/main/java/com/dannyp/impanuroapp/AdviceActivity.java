@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
@@ -30,6 +31,7 @@ import com.dannyp.impanuroapp.items.MonthsItem;
 import com.dannyp.impanuroapp.publicdata.PublicData;
 import com.dannyp.impanuroapp.utils.CustomSSLSocketFactory;
 import com.dannyp.impanuroapp.utils.DataUtils;
+import com.dannyp.impanuroapp.utils.SharedPrefs;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -61,8 +63,8 @@ public class AdviceActivity extends AppCompatActivity {
         bundle=getIntent().getExtras();
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Impanuro");
-        getSupportActionBar().setSubtitle("Ukwezi kwa "+bundle.getInt("month"));
-        getDataToViews(bundle.getInt("month"));
+        getSupportActionBar().setSubtitle("Ukwezi kwa "+ SharedPrefs.getMonthData(this));
+        getDataToViews(SharedPrefs.getMonthData(this));
     }
 
     @Override
@@ -75,9 +77,9 @@ public class AdviceActivity extends AppCompatActivity {
         try {
             String adviceMonthAPI="";
             if(PublicData.AdviceType.equals(StringConstants.SINGLE)){
-                adviceMonthAPI=getAdviceAdviceByMonthForSingle(month);
+                adviceMonthAPI=getAdviceAdviceByMonthForSingle(month, SharedPrefs.getUserData(this).getId());
             }else {
-                adviceMonthAPI=getAdviceAdviceByMonth(month);
+                adviceMonthAPI=getAdviceAdviceByMonth(month, SharedPrefs.getUserData(this).getId());
             }
             progressBar.setVisibility(View.VISIBLE);
            // ArrayList<MonthsItem> monthsItems=new ArrayList<>();
@@ -85,7 +87,7 @@ public class AdviceActivity extends AppCompatActivity {
                 public void onResponse(String param1String) {
                     progressBar.setVisibility(View.GONE);
                     try {
-                        JSONArray jSONArray = (new JSONObject(param1String)).getJSONArray("advices");
+                        JSONArray jSONArray = new JSONArray(param1String);
 
                         adapter = new AdviceAdapter(DataUtils.getAdviceList(jSONArray,AdviceActivity.this),AdviceActivity.this);
                         LinearLayoutManager layoutManager=new LinearLayoutManager(AdviceActivity.this);
@@ -102,14 +104,14 @@ public class AdviceActivity extends AppCompatActivity {
                     progressBar.setVisibility(View.GONE);
                     param1VolleyError.printStackTrace();
 
-                        Toast.makeText(AdviceActivity.this, param1VolleyError.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(AdviceActivity.this, "Habayemo ikibazo, mwongere mugerageze.", Toast.LENGTH_LONG).show();
                 }
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));
 
             Volley.newRequestQueue(this, new HurlStack(null, new CustomSSLSocketFactory())).add(stringRequest);
         } catch (Exception exception) {
-            Toast.makeText(this, exception.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(AdviceActivity.this, "Habayemo ikibazo, mwongere mugerageze.", Toast.LENGTH_LONG).show();
 
         }
     }

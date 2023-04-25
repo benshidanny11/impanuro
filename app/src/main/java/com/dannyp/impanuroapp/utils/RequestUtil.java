@@ -3,7 +3,9 @@ package com.dannyp.impanuroapp.utils;
 import static com.dannyp.impanuroapp.constants.ApiLinks.getAdviceAdviceByMonth;
 import static com.dannyp.impanuroapp.constants.ApiLinks.getAdviceAdviceByMonthForSingle;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.dannyp.impanuroapp.AdviceActivity;
 import com.dannyp.impanuroapp.PaymentActivity;
+import com.dannyp.impanuroapp.R;
 import com.dannyp.impanuroapp.adapters.AdviceAdapter;
 import com.dannyp.impanuroapp.constants.ApiLinks;
 import com.dannyp.impanuroapp.constants.StringConstants;
@@ -31,6 +34,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +45,7 @@ public class RequestUtil {
     public static void sendPaymentRequest(Context context,String number, String amount, String adviceId) {
         String url = ApiLinks.PAYMENT_CREATION_URL;
 
-        DialogUtil.showProgressDialog(context,"Gushyigikira impanuro","Mube mwihanganye...");
+        DialogUtil.showProgressDialog(context,"Ifatabuguzi ry'impanuro","Mube mwihanganye...");
         RequestQueue queue = Volley.newRequestQueue(context);
         JSONObject requestBody = new JSONObject();
         try{
@@ -55,7 +60,8 @@ public class RequestUtil {
             public void onResponse(JSONObject response) {
                 DialogUtil.hideProgressDialog();
                 try {
-                    DialogUtil.showDialog(context,"Gushyigikira","Emeza Gushyigikira kuri terephone yawe", response.getString("ref"),adviceId, new User(null,null,number));
+//                    DialogUtil.showDialog(context,"Ifatabuguzi ry'imbanuro","Banza wemeze ifatabuguzi muri tekefoni ukanda 1) hanyuma ishyiremo pin yawe maze ubone kwemeza hano ukanda yego.", response.getString("ref"),response.getString("status"),adviceId, SharedPrefs.getUserData(context));
+                    RequestUtil.savePaymentData(context, SharedPrefs.getUserData(context), adviceId, response.getString("ref"),response.getString("status"));
                 } catch (JSONException e) {
                     DialogUtil.hideProgressDialog();
                     e.printStackTrace();
@@ -67,7 +73,8 @@ public class RequestUtil {
             public void onErrorResponse(VolleyError error) {
                 DialogUtil.hideProgressDialog();
                 Toast.makeText(context, "Fail to get response = " + error, Toast.LENGTH_LONG).show();
-                DialogUtil.showResponseDialog(context,"Kwishura impanuro","Gushyigikira impanuro ntbyagenze neza ");
+                DialogUtil.showResponseDialog(context,"Ifatabuguzi ry'impanuro","Ifatabuguzi ry'impanuro ntbyagenze neza ");
+
             }
         });
         request.setRetryPolicy(new DefaultRetryPolicy(
@@ -77,23 +84,15 @@ public class RequestUtil {
         queue.add(request);
     }
 
-    public static void sendPaymentVerification(Context context,String refCode, String adviceId, User user) {
+    public static void sendPaymentVerification(Context context,String refCode, String adviceId) {
         String url = ApiLinks.PAYMENT_VERIFICATION_URL;
-        DialogUtil.showProgressDialog(context,"Gushyigikira impanuro","Mube mwihanganye...");
+        DialogUtil.showProgressDialog(context,"","Mube mwihanganye...");
         RequestQueue queue = Volley.newRequestQueue(context);
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url+refCode,null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
                 try {
-
-                    DialogUtil.hideProgressDialog();
-                    if (response.getString("paymentStatus").equals("pending")){
-                        DialogUtil.showDialog(context,"Gushyigikira","Mubanze mwemweze Gushyigikira kuri telephone", refCode ,adviceId, user);
-                    }else if(response.getString("paymentStatus").equals("successful")){
-                        RequestUtil.savePaymentData(context, user, adviceId, refCode);
-                    }else {
-                        DialogUtil.showResponseDialog(context,"Gushyigikira impanuro","Gushyigikira ntabwo byageinze neza, mwongere mugerageze.");
-                    }
+                    updatePaymentStatus(context,adviceId, response.getString("paymentStatus"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -103,15 +102,46 @@ public class RequestUtil {
             @Override
             public void onErrorResponse(VolleyError error) {
                 DialogUtil.hideProgressDialog();
-                System.out.print("Errorrrr=============++++"+error.getMessage());
-                DialogUtil.showResponseDialog(context,"Kwishura impanuro","Gushyigikira impanuro ntibyagenze neza "+error.getMessage());
-                Toast.makeText(context, "Fail to get response verification= ", Toast.LENGTH_LONG).show();
+                Log.e("PaymentVerification",error.getMessage());
+
             }
         });
         queue.add(request);
     }
 
-    private static void savePaymentData(Context context, User user,String adviceId,String paymentRef) {
+    private static void updatePaymentStatus(Context context, String adviceId, String status ){
+        String url = ApiLinks.getUpdatePaymentAPI(adviceId, SharedPrefs.getUserData(context).getId(), status);
+        RequestQueue queue = null;
+        try {
+            queue = Volley.newRequestQueue(context, new HurlStack(null, new CustomSSLSocketFactory()));
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url,null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                DialogUtil.hideProgressDialog();
+                ((Activity) context).finish();
+                context.startActivity(((Activity) context).getIntent());
+            }
+        }, new com.android.volley.Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                DialogUtil.hideProgressDialog();
+                Log.e("UpdatePaymentStatus",error.getMessage());
+            }
+        });
+        queue.add(request);
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            Log.e("UpdatePaymentStatus",e.getMessage());
+        } catch (KeyManagementException e) {
+            e.printStackTrace();
+            Log.e("UpdatePaymentStatus",e.getMessage());
+        }
+    }
+
+
+
+    public static void savePaymentData(Context context, User user,String adviceId,String paymentRef, String paymentStatus) {
         try{
         String url = ApiLinks.PAYMENT_SAVE_DATA_URL;
         RequestQueue queue = Volley.newRequestQueue(context,new HurlStack(null, new CustomSSLSocketFactory()));
@@ -124,23 +154,24 @@ public class RequestUtil {
                 try {
                     JSONObject object=new JSONObject(response);
                     DialogUtil.hideProgressDialog();
-                    Toast.makeText(context,object.getString("message"),Toast.LENGTH_LONG).show();
-                    DialogUtil.showResponseDialog(context,"Kwishura impanuro","Gushyigikira impanuro byagenze neza ✅");
+                    DialogUtil.showResponseDialog(context,"Ifatabuguzi ry'impanuro","Emeza ifatabuguzi ry'impanuro kuri phone yawe");
                     user.setId(object.getString("userid"));
                     SharedPrefs.saveUserData(context,user);
+
                 } catch (JSONException e) {
                     DialogUtil.hideProgressDialog();
-                    e.printStackTrace();
-                    DialogUtil.showResponseDialog(context,"Kwishura impanuro","Gushyigikira impanuro ntbyagenze neza");
+                    Log.e("SavePayment",e.getMessage());
+
+                    DialogUtil.showResponseDialog(context,"Ifatabuguzi ry'impanuro","Ifatabuguzi ry'impanuro ntibyagenze neza");
                 }
             }
         }, new com.android.volley.Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 DialogUtil.hideProgressDialog();
-                System.err.print("Errorr=====> "+Arrays.toString(error.getStackTrace()));
-                DialogUtil.showResponseDialog(context,"Kwishura impanuro","Gushyigikira impanuro ntbyagenze neza "+error+" HHhh");
-                Toast.makeText(context, "Fail to get response save data = " + error, Toast.LENGTH_LONG).show();
+                Log.e("SavepaymentData:=====>",error.toString());
+                DialogUtil.showResponseDialog(context,"Ifatabuguzi ry'impanuro","Ifatabuguzi ry'impanuro ntibyagenze neza.");
+//                Toast.makeText(context, "Fail to get response save data = " + error, Toast.LENGTH_LONG).show();
             }
         }){
             @Override
@@ -152,6 +183,7 @@ public class RequestUtil {
                 requestBody.put("amount","100");
                 requestBody.put("adviceid",adviceId);
                 requestBody.put("paymentref",paymentRef);
+                requestBody.put("paymentstatus",paymentStatus);
 
                 // at last we are
                 // returning our params.
@@ -171,21 +203,20 @@ public class RequestUtil {
             DialogUtil.showProgressDialog(context,null,"Mube mwihanganye");
             // ArrayList<MonthsItem> monthsItems=new ArrayList<>();
             StringRequest stringRequest = new StringRequest(Request.Method.GET,url, new Response.Listener<String>() {
-                public void onResponse(String param1String) {
+                public void onResponse(String response) {
                     DialogUtil.hideProgressDialog();
                     try {
-                        JSONObject userObject = new JSONObject(param1String);
+                        JSONObject userObject = new JSONObject(response.replace("{}",""));
                         User user=SharedPrefs.getUserData(context);
                         if(!userObject.isNull("client_id") && !userObject.isNull("client_phone") ){
                             user.setId(userObject.getString("client_id"));
                             user.setPhoneNumber(userObject.getString("client_phone"));
-                        }else {
-                            user.setPhoneNumber(phoneNumber);
                         }
                         SharedPrefs.saveUserData(context,user);
 
                     } catch (JSONException e) {
-                        Toast.makeText(context,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.payment_error_response,Toast.LENGTH_LONG).show();
+                        Log.e("Requestuserdata=====+", e.toString());
                         e.printStackTrace();
                     }
 
@@ -195,14 +226,14 @@ public class RequestUtil {
                     DialogUtil.hideProgressDialog();
                     param1VolleyError.printStackTrace();
 
-                    Toast.makeText(context, param1VolleyError.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, R.string.payment_error_response, Toast.LENGTH_LONG).show();
                 }
             });
             stringRequest.setRetryPolicy((RetryPolicy)new DefaultRetryPolicy(10000, 1, 1.0F));
 
             Volley.newRequestQueue(context, new HurlStack(null, new CustomSSLSocketFactory())).add(stringRequest);
         } catch (Exception exception) {
-            Toast.makeText(context, exception.getMessage(), Toast.LENGTH_LONG).show();
+            Toast.makeText(context, R.string.payment_error_response, Toast.LENGTH_LONG).show();
 
         }
     }

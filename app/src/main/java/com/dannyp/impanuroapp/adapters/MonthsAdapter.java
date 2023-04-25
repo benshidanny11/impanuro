@@ -15,6 +15,7 @@ import com.dannyp.impanuroapp.AdviceActivity;
 import com.dannyp.impanuroapp.R;
 import com.dannyp.impanuroapp.items.MonthsItem;
 import com.dannyp.impanuroapp.utils.ColorUtil;
+import com.dannyp.impanuroapp.utils.SharedPrefs;
 import com.github.lzyzsd.randomcolor.RandomColor;
 import com.vstechlab.easyfonts.EasyFonts;
 
@@ -51,7 +52,8 @@ public class MonthsAdapter  extends RecyclerView.Adapter<MonthsAdapter.MonthsHol
           public void onClick(View v) {
               Intent intent=new Intent(context,AdviceActivity.class);
               intent.putExtra("month",item.getMonthNumber());
-              intent.putExtra("month_name",item.getMonthName());
+              SharedPrefs.setMonthData(context, item.getMonthNumber());
+             // intent.putExtra("month_name",item.getMonthName());
               ((Activity)context).startActivity(intent);
           }
       });

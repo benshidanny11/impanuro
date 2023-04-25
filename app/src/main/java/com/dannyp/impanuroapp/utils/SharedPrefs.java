@@ -28,4 +28,19 @@ public class SharedPrefs {
         }
     }
 
+    public static void setMonthData(Context context, int monthNumber) {
+        SharedPreferences sharedPref = context.getSharedPreferences("paymentprefs", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putInt("month",monthNumber);
+        editor.apply();
+    }
+
+    public static int getMonthData(Context context) {
+        SharedPreferences sharedPref = context.getSharedPreferences("paymentprefs", Context.MODE_PRIVATE);
+       return sharedPref.getInt("month",0);
+    }
+
+
+
+
 }

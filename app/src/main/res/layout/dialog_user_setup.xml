@@ -18,9 +18,7 @@
         android:layout_marginTop="@dimen/_20sdp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="
-Urakaza neza muri aya mahugurwa ahoraho mu rukundo no mu ibanire y’abashakanye. Shyiramo nimero ya telefone yawe, bizagufasha kubika amakuru yose ari kuri iyi app. no kubona amashyasya."/>
-
+        android:text="Urakaza neza muri aya mahugurwa ahoraho mu rukundo no mu ibanire y’abashakanye. Shyiramo nimero ya telefone yawe, bizagufasha kubika amakuru yose ari kuri iyi app, no kubona amashyashya."/>
     <EditText
         android:id="@+id/txt_user_phone_in_dialog_user_setup"
         android:layout_width="match_parent"
