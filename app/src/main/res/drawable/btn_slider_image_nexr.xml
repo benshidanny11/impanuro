@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item>
+        <!-- Background color (optional) -->
+        <shape android:shape="oval">
+            <solid android:color="#D0D8D6D6" /> <!-- Change to your desired background color -->
+        </shape>
+    </item>
+    <item android:drawable="@drawable/baseline_navigate_next_24"
+        android:gravity="center"
+        />
+
+</layer-list>

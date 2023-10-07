@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rec_months_list_single">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <ProgressBar
+        android:layout_width="@dimen/_30sdp"
+        android:layout_height="@dimen/_30sdp"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        android:id="@+id/progress_load_advices_single"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No data found!"
+        android:textColor="@color/colorPrimary"
+        android:id="@+id/txt_no_data_found_advice_single"
+        android:layout_centerInParent="true"
+        android:visibility="gone"/>
+</RelativeLayout>
