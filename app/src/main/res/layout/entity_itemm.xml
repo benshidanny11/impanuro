@@ -40,7 +40,7 @@
             android:singleLine="false"
             android:text="Description"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="@dimen/_10sdp" />
+            android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
     <View

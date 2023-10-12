@@ -1,9 +1,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/page_1"
-        android:title="Home"/>
+        android:id="@+id/item_greatings_in_bottom_nav_item"
+        android:title="Indamukanyo"
+        android:icon="@drawable/baseline_handshake_24"
+        />
     <item
-        android:id="@+id/page_2"
+        android:id="@+id/item_measure_in_bottom_nav_item"
         android:enabled="true"
-        android:title="My app"/>
+        android:title="Ibipimo"
+        android:icon="@drawable/baseline_thermostat_24"/>
+
+    <item
+        android:id="@+id/item_answer_in_bottom_nav_item"
+        android:enabled="true"
+        android:title="Ibisubizo"
+        android:icon="@drawable/baseline_thumb_up_24"/>
+    <item
+        android:id="@+id/item_others_in_bottom_nav_item"
+        android:enabled="true"
+        android:title="Ibindi"
+        android:icon="@drawable/ic_baseline_menu_24"/>
 </menu>

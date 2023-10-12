@@ -5,7 +5,7 @@
     <item>
         <!-- Background color (optional) -->
         <shape android:shape="oval">
-            <solid android:color="#D0D8D6D6" /> <!-- Change to your desired background color -->
+            <solid android:color="#D8D6D6" /> <!-- Change to your desired background color -->
         </shape>
     </item>
     <item android:drawable="@drawable/baseline_navigate_before_24"

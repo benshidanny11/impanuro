@@ -1,5 +1,6 @@
 package com.dannyp.impanuroapp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -7,21 +8,23 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dannyp.impanuroapp.fragment.AnswersFragment;
 import com.dannyp.impanuroapp.fragment.GreatingFragment;
-import com.dannyp.impanuroapp.fragment.HomeFragment;
 import com.dannyp.impanuroapp.fragment.MeasureFragment;
 import com.dannyp.impanuroapp.fragment.SettingFragment;
 import com.dannyp.impanuroapp.models.User;
 import com.dannyp.impanuroapp.utils.RequestUtil;
 import com.dannyp.impanuroapp.utils.SharedPrefs;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.UUID;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView
+        .OnNavigationItemSelectedListener{
     Toolbar toolbar;
     User user;
     @Override
@@ -31,45 +34,13 @@ public class MainActivity extends AppCompatActivity {
         toolbar=(Toolbar)findViewById(R.id.tool_bar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Impanuro");
-        getSupportActionBar().setSubtitle("Menya gukunda / gukundwa");
-        BottomNavigationBar bottomNavigationBar = (BottomNavigationBar) findViewById(R.id.bottom_navigation_bar);
-
+        getSupportActionBar().setSubtitle("Menya imibanire ya muntu");
+        BottomNavigationView bottomNavigationBar = (BottomNavigationView) findViewById(R.id.bottom_navigation_bar);
 
         bottomNavigationBar
-                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_home_24, "Ahabanza"))
-                .addItem(new BottomNavigationItem(R.drawable.baseline_handshake_24, "Indamukanyo"))
-                .addItem(new BottomNavigationItem(R.drawable.baseline_thermostat_24, "Ibipimo"))
-                .addItem(new BottomNavigationItem(R.drawable.baseline_thumb_up_24, "Ibisubizo"))
-                .addItem(new BottomNavigationItem(R.drawable.ic_baseline_menu_24, "Ibindi"))
-                .setActiveColor(R.color.purple_500)
-                .setFirstSelectedPosition(0)
-                .initialise();
-        bottomNavigationBar.setTabSelectedListener(new BottomNavigationBar.OnTabSelectedListener(){
-            @Override
-            public void onTabSelected(int position) {
-                if(position==0){
-                    openFragment(new HomeFragment());
-                }else if(position==1){
-                    openFragment(new GreatingFragment());
-                }
-                else if(position==2){
-                    openFragment(new MeasureFragment());
-                }
-                else if(position==3){
-                    openFragment(new AnswersFragment());
-                }
-                else if(position==4){
-                    openFragment(new SettingFragment());
-                }
+                .setOnNavigationItemSelectedListener(this);
+        bottomNavigationBar.setSelectedItemId(R.id.item_greatings_in_bottom_nav_item);
 
-            }
-            @Override
-            public void onTabUnselected(int position) {
-            }
-            @Override
-            public void onTabReselected(int position) {
-            }
-        });
         user= SharedPrefs.getUserData(this);
         assert user != null;
 
@@ -77,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
 //            DialogUtil.showCustomDialog(this);
             RequestUtil.getUserData(this,  System.currentTimeMillis()/1000+ UUID.randomUUID().toString());
         }
-        openFragment(new HomeFragment());
+        openFragment(new GreatingFragment());
     }
 
     private void openFragment(Fragment fragment) {
@@ -85,5 +56,40 @@ public class MainActivity extends AppCompatActivity {
         transaction.replace(R.id.fragment_container, fragment);
         transaction.addToBackStack(null);
         transaction.commit();
+    }
+
+    GreatingFragment greatingFragment = new GreatingFragment();
+    MeasureFragment measureFragment = new MeasureFragment();
+    AnswersFragment answersFragment = new AnswersFragment();
+
+    SettingFragment settingFragment = new SettingFragment();
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if(item.getItemId()==R.id.item_greatings_in_bottom_nav_item){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, greatingFragment)
+                    .commit();
+            return true;
+        }else if(item.getItemId()==R.id.item_measure_in_bottom_nav_item){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, measureFragment)
+                    .commit();
+            return true;
+        }
+        else if(item.getItemId()==R.id.item_answer_in_bottom_nav_item){
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, answersFragment)
+                    .commit();
+            return true;
+        }else {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, settingFragment)
+                    .commit();
+            return true;
+        }
     }
 }

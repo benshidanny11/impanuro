@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -37,7 +38,7 @@ public class ViewEntityActivity extends AppCompatActivity {
 
     // Creating Object of ViewPagerAdapter
     ImageSliderViewpagerAdapter mViewPagerAdapter;
-    Button btnBack,btnNext;
+    ImageButton btnBack,btnNext;
     TextView txtTitle,txtDescription;
 
     Toolbar toolbar;
@@ -48,10 +49,10 @@ public class ViewEntityActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_entity);
-        mViewPager = findViewById(R.id.viewPagerMain);
-        btnBack= findViewById(R.id.btn_back_in_image_slider);
-        btnNext= findViewById(R.id.btn_next_in_image_slider);
-        toolbar= findViewById(R.id.toolbar_in_entity_activity);
+        mViewPager = (ViewPager) findViewById(R.id.viewPagerMain);
+        btnBack= (ImageButton)findViewById(R.id.btn_back_in_image_slider);
+        btnNext= (ImageButton)findViewById(R.id.btn_next_in_image_slider);
+        toolbar= (Toolbar) findViewById(R.id.toolbar_in_entity_activity);
         txtTitle=findViewById(R.id.txt_entity_title);
         txtDescription=findViewById(R.id.txt_entity_full_description);
         setSupportActionBar(toolbar);
